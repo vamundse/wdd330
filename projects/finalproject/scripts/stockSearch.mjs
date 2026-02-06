@@ -26,27 +26,29 @@ export class StockSearch {
         console.log("tickers:", getTickers);
         const tickers = getTickers; // await this.getTickers();
 
-        // gets the stockListTemplate method from the StockTickers class
-        const stockResults = document.querySelector(".search-results");
-        const stockResultsDiv = document.createElement('div');
-        const heading = document.createElement('h3');
-        const table = document.createElement('table');
+        if(tickers > 0) {
+            // gets the stockListTemplate method from the StockTickers class
+            const stockResults = document.querySelector(".search-results");
+            const stockResultsDiv = document.createElement('div');
+            const heading = document.createElement('h3');
+            const table = document.createElement('table');
 
-        stockResultsDiv.classList.add('stock-results');
-        heading.textContent = 'Stock results';
-        table.classList.add('stocks-table');
+            stockResultsDiv.classList.add('stock-results');
+            heading.textContent = 'Stock results';
+            table.classList.add('stocks-table');
 
-        // gets the data, adds the template and appends the tr
-        // to the HTML element, which should be a table
-        for (const ticker of tickers) {
-            const data = mockStockData[ticker]; // await getStockData(ticker);
-            const tickerRow = this.stockSearchTemplate(data);
-            this.element.appendChild(tickerRow);
-            table.appendChild(tickerRow);
-        };
-        stockResultsDiv.appendChild(heading);
-        stockResultsDiv.appendChild(table);
-        stockResults.appendChild(stockResultsDiv);
+            // gets the data, adds the template and appends the tr
+            // to the HTML element, which should be a table
+            for (const ticker of tickers) {
+                const data = mockStockData[ticker]; // await getStockData(ticker);
+                const tickerRow = this.stockSearchTemplate(data);
+                this.element.appendChild(tickerRow);
+                table.appendChild(tickerRow);
+            };
+            stockResultsDiv.appendChild(heading);
+            stockResultsDiv.appendChild(table);
+            stockResults.appendChild(stockResultsDiv);
+        }
     }
 
     async getTickers() {
