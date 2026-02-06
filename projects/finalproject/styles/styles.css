@@ -1,0 +1,332 @@
+:root {
+    --primary-color: #2347BD;
+    --primary-color-faded: rgb(32, 42, 76, 0.05);
+    --secondary-color: #ad0000;
+    --tertiary-color: #00610a;
+    --tertiary-color-faded: rgb(36, 86, 43, 0.1);
+    --white-color: #fff;
+    --black-color: #333;
+    --light-black-color: rgba(51, 51, 51, 0.3);
+    --light-gray-background: #f9f9f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "noto sans";
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, #sitename {
+    font-family: "noto serif"
+}
+
+HTML {
+    background-color: var(--light-gray-background);
+}
+
+/* Start of Header styles */
+header {
+    padding: 20px;
+    color: var(--black-color);
+    border-bottom: 1px solid var(--black-color);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    background-color: var(--white-color);
+    @media screen and (min-width: 1024px) {
+        display: grid;
+        grid-template-columns: 280px 1fr 310px;
+        align-items: center;
+        margin: 0;
+    }
+    & a {
+            color: var(--black-color);
+            text-decoration: none;
+            font-size: 20px;
+    }
+    & .top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        @media screen and (min-width: 1024px) {
+            justify-content: start;
+        }
+    }
+    & .top a {
+        display: flex;
+        gap: 20px;
+    }
+    & img {
+        width: 25px;
+    }
+    & #sitename {
+        font-size: 26px;
+        font-weight: 600;
+    }
+    & #hamburger::before {
+        content: "";
+        background-image: url("../images/burger.svg");
+        height: 25px;
+        width: 25px;
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        cursor: pointer;
+        @media screen and (min-width: 1024px) {
+            display: none;
+        }
+    }
+    & #hamburger.open::before {
+        background-image: url("../images/cross.svg");
+        height: 25px;
+        width: 25px;
+    }
+    & .navigation {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0 0 0;
+        align-items: center;
+        @media screen and (min-width: 1024px) {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            margin: 0;
+            justify-content: center;
+        }
+        & a:hover {
+            padding-left: 5px;
+            border-left: 5px solid var(--secondary-color);
+            @media screen and (min-width: 1024px) {
+                padding-left: 0px;
+                border-left: 0px solid var(--secondary-color);
+                border-bottom: 3px solid var(--secondary-color);
+            }
+        }
+    }
+    & .navigation.open {
+        display: flex;
+    }
+    & form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+        & input {
+            font-size: 16px;
+            border-radius: 10px;
+            border: 2px solid var(--light-black-color);
+            padding: 10px 10px 10px 30px;
+            min-width: 270px;
+            background-image: url("../images/search.svg");
+            background-size: 16px;
+            background-repeat: no-repeat;
+            background-position: left 10px center;
+        }
+        @media screen and (min-width: 1024px) {
+        margin: 0;
+        }   
+    }
+}
+/* End of header styles */
+
+/* Start of main styles */
+main {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.news, .stocks, #top-cur, .search-results {
+    display: flex;
+    margin: 20px;
+    @media screen and (min-width: 1024px) {
+        display: block;
+    }
+}
+/* End of main styles */
+
+/* Start of search results styles*/
+.search-results {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media screen and (min-width: 1024px) {
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 1024px;
+    }
+    & .news-results, .currency-results, .stock-results {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        & .search-article {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 10px;
+            @media screen and (min-width: 1024px) {
+                grid-template-columns: 1fr 6fr;
+            }
+            & .search-article-meta {
+                font-size: 12px;
+                grid-column: 1/3;
+            }
+        }
+        & img {
+            width: 100%;
+        }
+    }
+}
+
+.search-results.closed {
+    display: none;
+}
+/* End of search results styles */
+
+/* Start of news styles */
+.news {
+    flex-direction: column;
+    & form {
+        margin-bottom: 20px;
+        & label {
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+            gap: 10px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+    }
+    & select {
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+    @media screen and (min-width: 1024px) {
+        grid-row: 1/50;
+    }
+}
+
+#top-news {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    & img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+        border-bottom: 5px solid var(--secondary-color);
+    }
+    & a, h3 {
+        margin-top: 5px;
+        color: var(--black-color);
+        text-decoration: none;
+    }
+    & .image {
+        position: relative;
+    }
+    & .media {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--white-color);
+        padding: 5px;
+    }
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    
+        & .headline {
+            max-width: 308px;
+        }
+    }
+}
+/* End of news styles */
+
+/* Start ticker styles */
+.stocks-section, #top-cur {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    & a {
+        color: var(--black-color);
+        font-weight: 600;
+        text-decoration: none;
+        padding: 5px;
+    }
+    & a:hover {
+        background-color: var(--primary-color-faded);
+    }
+    & .ticker-title {
+        text-transform: uppercase;
+        color: var(--secondary-color);
+        & a {
+        color: var(--secondary-color);
+        }
+    }
+    & .negative {
+        color: var(--secondary-color);
+        font-weight: 600;
+    }
+    & .negative::after {
+            content: ' ↓';
+    }
+    & .positive {
+        color: var(--tertiary-color);
+        font-weight: 600;
+    }
+    & .positive::after {
+            content: ' ↑';
+    }
+    & .positive::before {
+            content: '+';
+    }
+}
+/* End ticker styles */
+
+/* Start of stocks styles */
+.stocks {
+    flex-direction: row;
+}
+
+.stocks-ticker {
+    display: flex;
+    gap: 5px;
+}
+/* End of stocks styles */
+
+/* Start of currency styles */
+#top-cur {
+    gap: 5px;
+}
+/* End of currency styles */
+
+/* Start of footer styles*/
+footer {
+    background-color: var(--black-color);
+    padding: 20px;
+    text-align: center;
+    color: var(--white-color);
+    & h2 {
+        font-size: 20px;
+    }
+    & a {
+        color: var(--white-color);
+        text-decoration: none;
+    }
+    & a:hover {
+        color: var(--secondary-color);
+    }
+    & .footer-col {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+    @media screen and (min-width: 1024px) {
+        display: flex;
+        justify-content: space-around;
+    }
+}

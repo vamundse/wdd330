@@ -1,0 +1,17 @@
+li[data-category="Fruit"] {
+    background-color: darkred;
+    padding: 20px;
+    color: white;
+}
+
+li[data-category="Vegetable"] {
+    background-color: darkgreen;
+    padding: 20px;
+    color: white;
+}
+
+li[data-category="Berry"] {
+    background-color: darkblue;
+    padding: 20px;
+    color: white;
+}
