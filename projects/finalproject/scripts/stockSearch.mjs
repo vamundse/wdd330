@@ -19,7 +19,10 @@ export class StockSearch {
         };
 
         // gets the codes we want to create tickers for
-        const getTickers = Object.keys(mockStockData);
+        const getTickers = Object.keys(mockStockData).filter(key => 
+            key.toLowerCase().includes(this.param.toLowerCase()) || 
+            mockStockData[key].name.toLowerCase().includes(this.param.toLowerCase())
+        );
         console.log("tickers:", getTickers);
         const tickers = getTickers; // await this.getTickers();
 
