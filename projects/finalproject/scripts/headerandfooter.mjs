@@ -1,6 +1,6 @@
 export async function header() {
     const header = document.querySelector('header');
-    const headerFetch = await fetch(new URL('../header.html', import.meta.url));;
+    const headerFetch = await fetch(new URL('../header.html', import.meta.url));
     const headerTemplate = await headerFetch.text();
     header.innerHTML = headerTemplate;
 }
