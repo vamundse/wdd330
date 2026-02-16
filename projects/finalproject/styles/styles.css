@@ -138,7 +138,7 @@ main {
     margin: 0 auto;
 }
 
-.news, .stocks, #top-cur, .search-results {
+.news, .stocks, #top-cur, .search-results, .currency-convertor {
     display: flex;
     margin: 20px;
     @media screen and (min-width: 1024px) {
@@ -184,6 +184,8 @@ main {
     display: none;
 }
 /* End of search results styles */
+
+/* Start of index.html styles */
 
 /* Start of news styles */
 .news {
@@ -303,6 +305,40 @@ main {
     gap: 5px;
 }
 /* End of currency styles */
+
+/* End of index.html styles */
+
+/* Start of currency.html styles */
+
+.currency-convertor {
+    flex-direction: column;
+    & form {
+        padding-top: 10px;
+        & input[type="text"],
+        input[type="number"],
+        select, button {
+            font-size: 20px;
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+        & fieldset {
+            border: none;
+            @media screen and (min-width: 1024px) {
+                display: flex;
+                gap: 20px;
+            }
+        }
+        & button {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: 1px solid var(--black-color);
+        }
+    }
+}
+
+/* End of currency.html styles */
 
 /* Start of footer styles*/
 footer {

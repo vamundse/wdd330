@@ -34,7 +34,7 @@ export class StockTickers {
         // gets the data, adds the template and appends the tr
         // to the HTML element, which should be a table
         for (const ticker of tickers) {
-            const data = mockStockData[ticker] || await getStockData(ticker);
+            const data = mockStockData[ticker]/* || await getStockData(ticker)*/;
             const tickerRow = this.stockListTemplate(data);
             div.appendChild(tickerRow);
         }
