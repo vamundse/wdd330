@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Watch - Front Page</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/currency.js" type="module"></script>
+</head>
+<body>
+    <header></header>
+    <section class="search-results">
+            <h2>Search results</h2>
+    </section>
+    <main>
+        <section class="currency-convertor">
+            <h2>Currency Convertor</h2>
+            <form id="currency-convertor">
+                <fieldset>
+                    <select name="from" id="from-currency"></select>
+                    <input type="number" step="0.01" name="value" id="from-value">
+                </fieldset>
+                <button id="swap">Swap</button>
+                <fieldset>
+                    <select name="to" id="to-currency"></select>
+                    <input type="number" step="0.01" name="value" id="to-value">
+                </fieldset>
+            </form>
+        </section>
+        <section>
+
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
