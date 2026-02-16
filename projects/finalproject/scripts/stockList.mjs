@@ -15,14 +15,15 @@ export class StockTickers {
         // gets the tickers we want to get data for
         const tickers = this.tickers;
 
-        const mockStockData = {
-        AAPL: { symbol: 'AAPL', price: 150.25, changePercentage: 2.5 },
-        GOOGL: { symbol: 'GOOGL', price: 140.80, changePercentage: -1.2 },
-        MSFT: { symbol: 'MSFT', price: 380.50, changePercentage: 3.8 },
-        TSLA: { symbol: 'TSLA', price: 245.30, changePercentage: -2.1 },
-        AMZN: { symbol: 'AMZN', price: 185.95, changePercentage: 1.7 },
-        META: { symbol: 'META', price: 520.10, changePercentage: 4.2 }
-        };
+        // Load mock stock data from shared JSON file
+        let mockStockData;
+        try {
+            const response = await fetch('data/mockStockData.json');
+            mockStockData = await response.json();
+        } catch (error) {
+            console.error('Failed to load mock stock data:', error);
+            return;
+        }
 
         const div = document.createElement('div');
         div.classList.add('stocks-section');
@@ -34,7 +35,7 @@ export class StockTickers {
         // gets the data, adds the template and appends the tr
         // to the HTML element, which should be a table
         for (const ticker of tickers) {
-            const data = mockStockData[ticker]/* || await getStockData(ticker)*/;
+            const data = mockStockData[ticker] //await getStockData(ticker);
             const tickerRow = this.stockListTemplate(data);
             div.appendChild(tickerRow);
         }

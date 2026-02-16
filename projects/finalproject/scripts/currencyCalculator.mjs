@@ -1,17 +1,20 @@
+import { getParam } from "./utilities.mjs";
+
 export class CurrencyConversion {
   constructor() {
-    this.from = localStorage.getItem('from-currency') || 'USD';
-    this.to = localStorage.getItem('to-currency') || 'EUR';
-    this.fromAmount = parseFloat(localStorage.getItem('from-amount')) || 100;
-    this.toAmount = parseFloat(localStorage.getItem('to-amount')) || 0;
+    this.from = getParam() || localStorage.getItem('from-currency');
+    this.to = localStorage.getItem('to-currency');
+    this.fromAmount = parseFloat(localStorage.getItem('from-amount'));
+    this.toAmount = parseFloat(localStorage.getItem('to-amount'));
   }
 
-  // currency convertion function provided by frankfurter.dev
   currencyConvertFromTo() {
+    const toValue = document.getElementById('to-value');
+    toValue.value = "";
     fetch(`https://api.frankfurter.dev/v1/latest?base=${this.from}&symbols=${this.to}`)
     .then((resp) => resp.json())
     .then((data) => {
-      const toValue = document.getElementById('to-value');
+      
       const convertedAmount = (this.fromAmount * data.rates[this.to]).toFixed(2);
       localStorage.setItem('to-amount', convertedAmount);
       toValue.value = convertedAmount;
@@ -19,10 +22,11 @@ export class CurrencyConversion {
   }
 
   currencyConvertToFrom() {
+    const toValue = document.getElementById('to-value');
+    toValue.value = "";
     fetch(`https://api.frankfurter.dev/v1/latest?base=${this.to}&symbols=${this.from}`)
     .then((resp) => resp.json())
     .then((data) => {
-      const fromValue = document.getElementById('from-value');
       const convertedAmount = (this.toAmount * data.rates[this.from]).toFixed(2);
       localStorage.setItem('from-amount', convertedAmount);
       fromValue.value = convertedAmount;
@@ -69,6 +73,7 @@ export class CurrencyConversion {
     const storedFromCode = localStorage.getItem('from-currency');
     const toAmount = localStorage.getItem('to-amount');
     const storedToCode = localStorage.getItem('to-currency');
+
     if (fromAmount && storedFromCode && storedToCode && toAmount) {
       fromValue.value = fromAmount;
       fromCurrency.value = storedFromCode;

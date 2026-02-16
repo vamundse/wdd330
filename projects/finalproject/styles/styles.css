@@ -18,7 +18,12 @@
 }
 
 h1, h2, h3, h4, #sitename {
-    font-family: "noto serif"
+    font-family: "noto serif";
+    color: var(--black-color);
+}
+
+p {
+    color: var(--black-color);
 }
 
 HTML {
@@ -138,7 +143,7 @@ main {
     margin: 0 auto;
 }
 
-.news, .stocks, #top-cur, .search-results, .currency-convertor {
+.news, .stocks, #top-cur, .search-results, .currency-convertor, .one-stock {
     display: flex;
     margin: 20px;
     @media screen and (min-width: 1024px) {
@@ -187,7 +192,7 @@ main {
 
 /* Start of index.html styles */
 
-/* Start of news styles */
+/* Start of index news styles */
 .news {
     flex-direction: column;
     & form {
@@ -248,7 +253,7 @@ main {
 }
 /* End of news styles */
 
-/* Start ticker styles */
+/* Start index ticker styles */
 .stocks-section, #top-cur {
     display: flex;
     align-items: center;
@@ -289,7 +294,7 @@ main {
 }
 /* End ticker styles */
 
-/* Start of stocks styles */
+/* Start of index stocks styles */
 .stocks {
     flex-direction: row;
 }
@@ -300,7 +305,7 @@ main {
 }
 /* End of stocks styles */
 
-/* Start of currency styles */
+/* Start of index currency styles */
 #top-cur {
     gap: 5px;
 }
@@ -309,7 +314,6 @@ main {
 /* End of index.html styles */
 
 /* Start of currency.html styles */
-
 .currency-convertor {
     flex-direction: column;
     & form {
@@ -337,8 +341,36 @@ main {
         }
     }
 }
-
 /* End of currency.html styles */
+
+/* Start of stocks.html styles */
+.display-stocks {
+    display: flex;
+    flex-direction: column;
+}
+
+.one-stock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: var(--light-black-color);
+    padding: 10px;
+}
+
+.stock-symbol {
+    grid-column: 1/4;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.stock-symbol, .stock-close, .stock-price, .stock-change {
+    padding: 10px;
+}
+
+.stock-close, .stock-price, .stock-change {
+    font-size: 18px;
+    justify-items: center;
+}
+/* End of stocks.html styles */
 
 /* Start of footer styles*/
 footer {
