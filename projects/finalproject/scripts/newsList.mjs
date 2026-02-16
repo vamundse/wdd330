@@ -21,7 +21,7 @@ export class NewsList {
 
     renderNewsList(list) {
         this.element.innerHTML = "";
-        list.slice(0, 1).forEach(article => {
+        list.slice(0, 9).forEach(article => {
             this.element.innerHTML += this.topNewsTemplate(article);
         });
     }

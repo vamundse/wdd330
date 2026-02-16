@@ -39,7 +39,7 @@ export async function getCurrencyData(currencyList, baseCurrency) {
 export async function getNewsData(category) {
         const apiKey = "f52b88432ac34ea7992ba153bed76bbb";
         const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}&language=en`;
-        try {
+        /*try {
             const response = await fetch(apiUrl);
             if(!response.ok) {
                     throw new Error(`HTTP Error! status: ${response.status}`)
@@ -49,6 +49,14 @@ export async function getNewsData(category) {
             return data.articles;
         } catch(error) {
             console.error("Failed to fetch news data:", error);
-            return null;
+            // Fallback to mock data*/
+            try {
+                const mockResponse = await fetch('data/mockNewsData.json');
+                const mockData = await mockResponse.json();
+                console.log("Using mock news data:", mockData);
+                return mockData;
+            } catch(mockError) {
+                console.error("Failed to load mock data:", mockError);
+                return null;
             }
         }
