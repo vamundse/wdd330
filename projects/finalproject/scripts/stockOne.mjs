@@ -1,4 +1,5 @@
 import { getStockData } from "./apiDataFetch.mjs";
+
 export class OneStock {
     constructor(element, stocklist) {
         this.stocklist = stocklist;

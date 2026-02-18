@@ -1,18 +1,18 @@
 export async function getStockData(stockSymbolList) {
-        const apiKey = "wZKvioZjhLFJbsgC79HVeyDpHCIhmsAa";
-        const apiURL = `https://financialmodelingprep.com/stable/quote?symbol=${stockSymbolList}&apikey=${apiKey}`;
-        const response = await fetch(apiURL);
-        try {
-            if(!response.ok) {
-                throw new Error(`HTTP Error! status: ${response.status}`)
-            }
-            const data = await response.json();
-            console.log("StockApi ticker data", data);
-            return data[0];
-            } catch(error) {
-                console.error("Failed to fetch stock data:", error);
-                return null;
-            }
+    const apiKey = "wZKvioZjhLFJbsgC79HVeyDpHCIhmsAa";
+    const apiURL = `https://financialmodelingprep.com/stable/quote?symbol=${stockSymbolList}&apikey=${apiKey}`;
+    const response = await fetch(apiURL);
+    try {
+        if(!response.ok) {
+            throw new Error(`HTTP Error! status: ${response.status}`)
+        }
+        const data = await response.json();
+        console.log("StockApi ticker data", data);
+        return data[0];
+        } catch(error) {
+            console.error("Failed to fetch stock data:", error);
+            return null;
+        }
     }
 
 export async function getCurrencyData(currencyList, baseCurrency) {
