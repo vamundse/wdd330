@@ -20,26 +20,32 @@ export class NewsList {
     }
 
     renderNewsList(list) {
-        this.element.innerHTML = "";
+        let html = "";
         list.slice(0, 9).forEach(article => {
-            this.element.innerHTML += this.topNewsTemplate(article);
+            html += this.topNewsTemplate(article);
         });
+        this.element.innerHTML = html;
     }
 
     topNewsTemplate(article) {
         let image = article.urlToImage;
+        let imageLarge = article.urlToImage;
         if (!image) {
             image = "images/news-placeholder.webp"
+            imageLarge = "images/news-placeholder-large.webp"
         }
         return `<div class="headline">
         <div class="image">
             <a href="${article.url}">
-                <img src="${image}">
+                <picture>
+                    <source media="(min-width: 511px) and (max-width: 1023px)" srcset="${imageLarge}"/>
+                    <img src="${image}" width="510" height="340" alt="${article.title}"/>
+                </picture>
             </a>
             <p class="media">${article.source.name}, ${article.publishedAt.split("T")[0]}</p>
         </div>
         <a href="${article.url}">
-            <h3>${article.title}</h3>
+            <h2>${article.title}</h2>
         </a>
     </div>`;
     }

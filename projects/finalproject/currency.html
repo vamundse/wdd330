@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Watch - Front Page</title>
+    <title>Business Watch Currency Converter, keep up to date on World Currencies</title>
+    <meta name="description" content="Keep up to date on World currencies with the Business Watch currency Converter">
+    <meta name="author" content="Vegard André Amundsen">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,24 +19,30 @@
             <h2>Search results</h2>
     </section>
     <main>
-        
-        <section class="currency-convertor">
-            <h2>Currency Convertor</h2>
-            <form id="currency-convertor">
-                <fieldset>
-                    <select name="from" id="from-currency"></select>
-                    <input type="number" step="0.01" name="value" id="from-value">
-                </fieldset>
-                <button id="swap">Swap</button>
-                <fieldset>
-                    <select name="to" id="to-currency"></select>
-                    <input type="number" step="0.01" name="value" id="to-value">
-                </fieldset>
-            </form>
-        </section>
-        <section class="currency">
-            <div id="top-cur"></div>
-        </section>
+        <div class="currency-container">
+            <section class="currency-convertor">
+                <h2>Currency convertor</h2>
+                <form id="currency-convertor">
+                    <fieldset>
+                        <select name="from" id="from-currency" aria-label="From currency"></select>
+                        <input type="number" step="0.01" name="from-value" id="from-value" aria-label="From currency amount" placeholder="Type amount">
+                    </fieldset>
+                    <button id="swap">Swap</button>
+                    <fieldset>
+                        <select name="to" id="to-currency" aria-label="To currency"></select>
+                        <input type="number" step="0.01" name="to-value" id="to-value" aria-label="To currency amount">
+                    </fieldset>
+                </form>
+            </section>
+            <section class="currency-rates">
+                <h2>Exchange Rates</h2>
+                <div class="table-ani">
+                    <table id="pop-cur">
+                        
+                    </table>
+                </div>
+            </section>
+        </div>
     </main>
     <footer></footer>
 </body>

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Watch - Front Page</title>
+    <title>Business Watch, get the latest in Business</title>
+    <meta name="description" content="Business Watch gives you the latest in business news, stock market data and currency values">
+    <meta name="author" content="Vegard André Amundsen">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +27,7 @@
         </section>
         <section class="news">
             <form name="newsselect">
-                <label for="newscategory">NEWS
+                <label for="newscategory"><a href="news.html">NEWS</a>
                     <select name="newscategory" id="newscategory" data-id="newscategory">
                         <option value="business">Business</option>
                         <option value="technology">Technology</option>
@@ -33,7 +35,7 @@
                     </select>
                 </label>
             </form>
-            <span id="top-news"></span>
+            <span id="top-news" class="top-news"></span>
         </section>
     </main>
     <footer></footer>

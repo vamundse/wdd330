@@ -2,64 +2,123 @@ import { getParam } from "./utilities.mjs";
 
 export class CurrencyConversion {
   constructor() {
-    this.from = getParam() || localStorage.getItem('from-currency');
-    this.to = localStorage.getItem('to-currency');
-    this.fromAmount = parseFloat(localStorage.getItem('from-amount'));
-    this.toAmount = parseFloat(localStorage.getItem('to-amount'));
+    this.fromCurrency;
+    this.toCurrency;
+    this.fromAmount;
+    this.toAmount;
+  }
+
+  async init() {
+    await this.setOptions();
+    this.getParams();
+    this.getUserInput();
+    this.swapButton();
   }
 
   currencyConvertFromTo() {
     const toValue = document.getElementById('to-value');
-    toValue.value = "";
-    fetch(`https://api.frankfurter.dev/v1/latest?base=${this.from}&symbols=${this.to}`)
+    fetch(`https://api.frankfurter.dev/v1/latest?base=${this.fromCurrency}&symbols=${this.toCurrency}`)
     .then((resp) => resp.json())
     .then((data) => {
-      
-      const convertedAmount = (this.fromAmount * data.rates[this.to]).toFixed(2);
+      const convertedAmount = (this.fromAmount * data.rates[this.toCurrency]).toFixed(2);
       localStorage.setItem('to-amount', convertedAmount);
+      this.toAmount = convertedAmount;
       toValue.value = convertedAmount;
     });
   }
 
   currencyConvertToFrom() {
-    const toValue = document.getElementById('to-value');
-    toValue.value = "";
-    fetch(`https://api.frankfurter.dev/v1/latest?base=${this.to}&symbols=${this.from}`)
+    const fromValue = document.getElementById('from-value');
+    fetch(`https://api.frankfurter.dev/v1/latest?base=${this.toCurrency}&symbols=${this.fromCurrency}`)
     .then((resp) => resp.json())
     .then((data) => {
-      const convertedAmount = (this.toAmount * data.rates[this.from]).toFixed(2);
+      const convertedAmount = (this.toAmount * data.rates[this.fromCurrency]).toFixed(2);
       localStorage.setItem('from-amount', convertedAmount);
+      this.fromAmount = convertedAmount;
       fromValue.value = convertedAmount;
     });
   }
 
-  swapButton() {
-    const fromCurrency = document.getElementById('from-currency')
-    const fromValue = document.getElementById('from-value');
+  getParams() {
+    const param = getParam();
+    let fromCurrency = 'EUR';
+    let fromAmount;
+    let toCurrency = 'USD';
+    let toAmount;
+
+    if(param) {
+    const params = new URLSearchParams('?' + param)
+    fromCurrency = params.get('from');
+    fromAmount = params.get('from-value');
+    toCurrency = params.get('to');
+    toAmount = params.get('to-value')
+    }
+
+    localStorage.setItem('from-currency', fromCurrency);
+    localStorage.setItem('to-currency', toCurrency);
+    localStorage.setItem('from-amount', fromAmount);
+    localStorage.setItem('to-amount', toAmount);
+
+    this.fromCurrency = fromCurrency;
+    this.toCurrency = toCurrency;
+    this.fromAmount = fromAmount;
+    this.toAmount = toAmount;
+
+    this.setValuesForm();
+  }
+
+  getLocalStorage() {
+    const fromAmount = localStorage.getItem('from-amount');
+    const fromCurrency = localStorage.getItem('from-currency');
+    const toAmount = localStorage.getItem('to-amount')
+    const toCurrency = localStorage.getItem('to-currency')
+    
+    return {
+      fromAmount: fromAmount,
+      fromCurrency: fromCurrency,
+      toAmount: toAmount,
+      toCurrency: toCurrency
+    }
+  }
+
+  setValuesForm() {
+    const fromAmount = document.getElementById('from-value');
+    const fromCurrency = document.getElementById('from-currency');
+    const toAmount = document.getElementById('to-value');
     const toCurrency = document.getElementById('to-currency');
-    const toValue = document.getElementById('to-value');
+
+    fromAmount.value = this.fromAmount;
+    fromCurrency.value = this.fromCurrency;
+    toAmount.value = this.toAmount;
+    toCurrency.value = this.toCurrency;
+  }
+
+  swapButton() {
+    const fromAmount = document.getElementById('from-value');
+    const fromCurrency = document.getElementById('from-currency');
+    const toAmount = document.getElementById('to-value');
+    const toCurrency = document.getElementById('to-currency');
     const swapButton = document.getElementById('swap');
 
     swapButton.addEventListener('click', () => {
-      const fromAmount = localStorage.getItem('from-amount');
-      const fromCode = localStorage.getItem('from-currency');
-      const toAmount = localStorage.getItem('to-amount');
-      const toCode = localStorage.getItem('to-currency');
+      const lsValues = this.getLocalStorage();
     
-      localStorage.setItem('to-amount', fromAmount);
-      localStorage.setItem('to-currency', fromCode);
-      localStorage.setItem('from-amount', toAmount);
-      localStorage.setItem('from-currency', toCode);
+      localStorage.setItem('to-amount', lsValues.fromAmount);
+      localStorage.setItem('to-currency', lsValues.fromCurrency);
+      localStorage.setItem('from-amount', lsValues.toAmount);
+      localStorage.setItem('from-currency', lsValues.toCurrency);
 
-      fromValue.value = toAmount;
-      fromCurrency.value = toCode;
-      toValue.value = fromAmount;
-      toCurrency.value = fromCode;
+      // Swap class properties
+      this.fromAmount = lsValues.toAmount;
+      this.fromCurrency = lsValues.toCurrency;
+      this.toAmount = lsValues.fromAmount;
+      this.toCurrency = lsValues.fromCurrency;
 
-      this.fromAmount = parseFloat(toAmount);
-      this.from = toCode;
-      this.toAmount = parseFloat(fromAmount);
-      this.to = fromCode;
+      // Swap DOM values
+      fromAmount.value = this.fromAmount;
+      fromCurrency.value = this.fromCurrency;
+      toAmount.value = this.toAmount;
+      toCurrency.value = this.toCurrency;
     });
   }
 
@@ -69,10 +128,10 @@ export class CurrencyConversion {
     const toCurrency = document.getElementById('to-currency');
     const toValue = document.getElementById('to-value');
 
-    const fromAmount = localStorage.getItem('from-amount');
-    const storedFromCode = localStorage.getItem('from-currency');
-    const toAmount = localStorage.getItem('to-amount');
-    const storedToCode = localStorage.getItem('to-currency');
+    const fromAmount = this.fromAmount;
+    const storedFromCode = this.fromCurrency;
+    const toAmount = this.toAmount;
+    const storedToCode = this.toCurrency;
 
     if (fromAmount && storedFromCode && storedToCode && toAmount) {
       fromValue.value = fromAmount;
@@ -89,8 +148,8 @@ export class CurrencyConversion {
 
       this.toAmount = parseFloat(toAmount);
       this.fromAmount = parseFloat(fromAmount);
-      this.from = fromCode;
-      this.to = toCode;
+      this.fromCurrency = fromCode;
+      this.toCurrency = toCode;
 
       localStorage.setItem('to-amount', toAmount);
       localStorage.setItem('from-currency', fromCode);
@@ -108,8 +167,8 @@ export class CurrencyConversion {
 
       this.toAmount = parseFloat(toAmount);
       this.fromAmount = parseFloat(fromAmount);
-      this.from = fromCode;
-      this.to = toCode;
+      this.fromCurrency = fromCode;
+      this.toCurrency = toCode;
 
       localStorage.setItem('to-amount', toAmount);
       localStorage.setItem('from-currency', fromCode);
@@ -126,9 +185,9 @@ export class CurrencyConversion {
       const toCode = toCurrency.value;
 
       this.fromAmount = parseFloat(fromAmount);
-      this.from = fromCode;
-      this.to = toCode;
-      this.toValue = parseFloat(toAmount);
+      this.fromCurrency = fromCode;
+      this.toCurrency = toCode;
+      this.toAmount = parseFloat(toAmount);
 
       localStorage.setItem('from-amount', fromAmount);
       localStorage.setItem('from-currency', fromCode);
@@ -145,9 +204,9 @@ export class CurrencyConversion {
       const toCode = toCurrency.value;
 
       this.fromAmount = parseFloat(fromAmount);
-      this.from = fromCode;
-      this.to = toCode;
-      this.toValue = parseFloat(toAmount);
+      this.fromCurrency = fromCode;
+      this.toCurrency = toCode;
+      this.toAmount = parseFloat(toAmount);
 
       localStorage.setItem('from-amount', fromAmount);
       localStorage.setItem('from-currency', fromCode);

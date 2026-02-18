@@ -48,7 +48,7 @@ export class CurrencySearch {
             console.log(findCode);
             if(findCode) {
                 console.log("Currency Code found:", param.toUpperCase());
-                return param.toUpperCase();
+                return [findCode];
             }
         }
         const findNames = currencyList.filter(currency =>
@@ -61,7 +61,7 @@ export class CurrencySearch {
     currencySearchTemplate(data) {
         let html = "";
         data.forEach(currency => {
-            html += `<div class="currency-search-row"><a href="./currency?${currency[0]}">${currency[1]} - ${currency[0]}</a></div>`;
+            html += `<div class="currency-search-row"><a href="./currency?from=${currency[0]}">${currency[1]} - ${currency[0]}</a></div>`;
         });
         return html;
     }

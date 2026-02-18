@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Watch - Front Page</title>
+    <title>Business Watch Stock Data, for the latest market updates</title>
+    <meta name="description" content="Get the latest market stock updates on Business Watch">
+    <meta name="author" content="Vegard André Amundsen">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,12 +19,22 @@
             <h2>Search results</h2>
     </section>
     <main>
-        <section class="stocks">
-            <div class="stocks-div" id="pop-stocks"></div>
-        </section>
-        <section class="display-stocks">
-
-        </section>
+        <div class="stocks-container">
+            <section class="param-stock">
+                <h2>You clicked</h2>
+            </section>
+            <section class="favorite-stock-list">
+                <h2>Favorite Stocks</h2>
+                <div class="add-stocks">
+                    <input id="add-favorite-stock" name="add-favorite-stock" list="favorite-stocks-list" aria-label="Pick your favorite Stock" placeholder="Pick your favorite Stock">
+                    <datalist id="favorite-stocks-list"></datalist>
+                    <button id="add-stock-button">Add to favorites</button>
+                </div>
+            </section>
+            <section class="pop-stocks">
+                <h2>Popular Stocks</h2>
+            </section>
+        </div>
     </main>
     <footer></footer>
 </body>

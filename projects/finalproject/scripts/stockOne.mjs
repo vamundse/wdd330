@@ -1,14 +1,14 @@
-import { getStockData } from "./apiDataFetch.mjs";
-import { getParam } from "./utilities.mjs";
-
 export class OneStock {
-    constructor(element) {
-        const param = getParam();
-        this.stock = param ? [param]: ['MSFT', 'AAPL', 'TSLA', 'META', 'AMZN', 'GOOGL'];
+    constructor(element, stocklist) {
+        this.stocklist = stocklist;
         this.element = element;
     }
 
-    async renderStockData() {
+    async init() {
+        await this.renderStockData(this.stocklist)
+    };
+
+    async renderStockData(stocklist) {
         let mockStockData;
         try {
             const response = await fetch('data/mockStockData.json');
@@ -17,7 +17,7 @@ export class OneStock {
             console.error('Failed to load mock stock data:', error);
             return;
         }
-        const stocks = this.stock;
+        const stocks = stocklist;
         const stockSection = this.element;
         for (const stock of stocks) {
             const data = mockStockData[stock]; //await getStockData(stock);
@@ -28,20 +28,21 @@ export class OneStock {
 
     stockTemplate(stock) {
         let html = `
-        <div class="one-stock">
+        <div class="one-stock" data-symbol="${stock.symbol}">
             <div class="stock-symbol"><h2>${stock.symbol} / ${stock.name}</h2></div>
             <div class="stock-close">
-                <div class="close-title">Close</div>
+                <div class="close-title">Yesterday</div>
                 <div>$${stock.previousClose}</div>
             </div>
             <div class="stock-price">
-                <div class="price-title">Price</div>
+                <div class="price-title">Today</div>
                 <div>$${stock.price}</div>
             </div>
             <div class="stock-change">
                 <div class="change-title">Change</div>
-                <div>${stock.changePercentage.toFixed(2)}%</div>
+                <div class="${stock.changePercentage > 0 ? 'positive' : stock.changePercentage < 0 ? 'negative' : ''}">${stock.changePercentage.toFixed(2)}%</div>
             </div>
+            <button class="stock-remove">x</button>
         </div>
         `;
     return html;

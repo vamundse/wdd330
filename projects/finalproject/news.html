@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Watch Business News, get the latest Business news</title>
+    <meta name="description" content="Get the latest Business News with Business Watch">
+    <meta name="author" content="Vegard André Amundsen">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/news.js" type="module"></script>
+</head>
+<body>
+    <header></header>
+    <section class="search-results">
+            <h2>Search results</h2>
+    </section>
+    <main>
+        <div class="news-page-container">
+            <section class="favorite-news">
+                <h2>Favorite News</h2>
+                <div class="add-news">
+                    <input id="add-favorite-news" name="add-favorite-news" aria-label="Pick your favorite Topic" placeholder="Pick your favorite Topic">
+                    <button id="add-news-button">Add to favorites</button>
+                </div>
+                <div class="news-favorites-list">
+                    <button id="news-fav-btn">Favorites list</button>
+                    <div id="news-topics"></div>
+                    <div id="news-message"></div>
+                </div>
+                <div class="all-news-results"></div>
+            </section>
+            <section class="general-news">
+                <h2>General News</h2>
+                <form name="newsselect">
+                    <label for="newscategory">CATEGORY
+                        <select name="newscategory" id="newscategory" data-id="newscategory">
+                            <option value="business">Business</option>
+                            <option value="technology">Technology</option>
+                            <option value="science">Science</option>
+                        </select>
+                    </label>
+                </form>
+                <span id="top-news" class="general-news-articles"></span>
+            </section>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>

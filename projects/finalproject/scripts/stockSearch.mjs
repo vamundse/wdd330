@@ -75,7 +75,7 @@ export class StockSearch {
         // making the template
         const ticker = document.createElement('a');
         ticker.href = `./stocks.html?${data.symbol}`;
-        ticker.classList.add('stocks-ticker');
+        ticker.classList.add('search-ticker');
         const name = document.createElement('div');
         name.innerHTML = `${data.name}`;
         const symbol = document.createElement('div');

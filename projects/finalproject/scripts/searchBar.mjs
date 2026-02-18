@@ -12,19 +12,14 @@ export class SearchBar {
         const param = getSearchParam();
         console.log("Search parameter:", param);
         if(param) {
-        const main = document.querySelector('main');
-        main.innerHTML = "";
-        this.showNewsSearch(param);
-        this.showCurrencySearch(param);
-        this.showStockSearch(param);
+            const main = document.querySelector('main');
+            main.innerHTML = "";
+            this.showCurrencySearch(param);
+            this.showStockSearch(param);
+            this.showNewsSearch(param);
         } else {
             this.element.classList.toggle('closed');
         }
-    }
-
-    showNewsSearch(param) {
-        const newsSearchClass = new newsSearch.NewsSearch(this.element, param);
-        newsSearchClass.renderNewsSearchResults();
     }
 
     showCurrencySearch(param) {
@@ -36,4 +31,11 @@ export class SearchBar {
         const stockSearchClass = new stockSearch.StockSearch(this.element, param);
         stockSearchClass.renderStockSearch();
     }
+    
+    showNewsSearch(param) {
+        const newsSearchClass = new newsSearch.NewsSearch(this.element, param);
+        newsSearchClass.renderNewsSearchResults();
+    }
+
+    
 }

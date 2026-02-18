@@ -1,12 +1,22 @@
-import * as stockList from "./stockList.mjs";
 import * as stockOne from "./stockOne.mjs";
+import { getParam } from "./utilities.mjs";
+import * as addfavoriteStocks from "./stockFavorite.mjs";
 
-const inst = new stockOne.OneStock(document.querySelector(".display-stocks"));
-inst.renderStockData();
+const param = getParam();
+if(param) {
+    const paramStock = new stockOne.OneStock(document.querySelector('.param-stock'), [param]);
+    paramStock.init();
+} else {
+    document.querySelector('.param-stock').classList.toggle('hide');
+}
 
-/* Making stock data front page ticker */
-const frontPageStocksElement = document.querySelector(".stocks-div");
-const tickers = ['MSFT', 'AAPL', 'TSLA', 'META', 'AMZN', 'GOOGL'];
-const frontPageStocks = new stockList.StockTickers(frontPageStocksElement, tickers);
-frontPageStocks.init();
-/* End of stock data front page*/
+const popular = new stockOne.OneStock(document.querySelector('.pop-stocks'), ['MSFT', 'AAPL', 'META', 'AMZN', 'GOOGL', 'TSLA']);
+popular.init();
+
+const favoriteList = JSON.parse(localStorage.getItem('favorite-stocks'));
+const favoriteStocks = new stockOne.OneStock(document.querySelector('.favorite-stock-list'), favoriteList);
+favoriteStocks.init();
+
+const instFavo = new addfavoriteStocks.FavoriteStock();
+instFavo.init();
+instFavo.addToLocalStorage();
