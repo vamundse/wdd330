@@ -32,13 +32,13 @@ export class NewsSearch {
         const html = `
         <div class="search-article">    
             <div class="search-article-meta">
-                <p>${article.source.name} - ${article.publishedAt.split('T')[0]}</p>
+                <p>${article.thread.site} - ${article.thread.published.split('T')[0]}</p>
             </div>    
             <div>
-                <a href="${article.url}"><img src="${article.urlToImage}" alt="${article.title}"></a>
+                <a href="${article.url}"><img src="${article.thread.main_image}" alt="${article.thread.title}"></a>
             </div>
             <div>
-                <a href="${article.url}"><h4>${article.title}</h4></a>
+                <a href="${article.thread.url}"><h4>${article.title}</h4></a>
             </div>
         </div>`;
         return html;
@@ -73,8 +73,8 @@ export class NewsFavorites {
     }
 
     newsFavoritesTemplate(article) {
-        let image = article.urlToImage;
-        let imageLarge = article.urlToImage;
+        let image = article.thread.main_image;
+        let imageLarge = article.thread.main_image;
         if (!image) {
             image = "images/news-placeholder.webp"
             imageLarge = "images/news-placeholder-large.webp"
@@ -82,17 +82,17 @@ export class NewsFavorites {
         let html = `
             <div class="headline">
             <div class="image">
-                <a href="${article.url}">
+                <a href="${article.thread.url}">
                     <picture>
                         <source media="(min-width: 511px) and (max-width: 1023px)" srcset="${imageLarge}"/>
-                        <img src="${image}" width="510" height="340" alt="${article.title}"/>
+                        <img src="${image}" width="510" height="340" alt="${article.thread.title}"/>
                     </picture>
                 </a>
-                <p class="media">${article.source.name}, ${article.publishedAt.split("T")[0]}</p>
+                <p class="media">${article.thread.site}, ${article.thread.published.split("T")[0]}</p>
             </div>
-                <a href="${article.url}">
-                    <h2>${article.title}</h2>
-                </a>
+            <a href="${article.thread.url}">
+                <h2>${article.thread.title}</h2>
+            </a>
             </div>`
         return html;
     }

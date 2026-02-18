@@ -34,19 +34,19 @@ export async function getCurrencyData(currencyList, baseCurrency) {
             console.error("Failed to fetch currency data:", error);
             return null;
     }
-}     
+}
 
 export async function getNewsData(category) {
-    const apiKey = "6351960f47e44bb2872e21d0cff98c86";
-    const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}&language=en`;
+    const apiKey = "4381b49d-ddea-45b3-92d3-3eaf7e4c1e97";
+    const apiUrl = `https://api.webz.io/newsApiLite?token=${apiKey}&q=${category}`;
     try {
         const response = await fetch(apiUrl);
         if(!response.ok) {
                 throw new Error(`HTTP Error! status: ${response.status}`)
         }
         const data = await response.json();
-        console.log("NewsApi data", data);
-        return data.articles;
+        console.log("Webz data", data);
+        return data.posts;
     } catch(error) {
         console.error("Failed to fetch news data:", error);
     }

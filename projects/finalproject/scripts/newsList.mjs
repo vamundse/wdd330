@@ -27,7 +27,7 @@ export class NewsList {
         this.element.innerHTML = html;
     }
 
-    topNewsTemplate(article) {
+    /*topNewsTemplate(article) {
         let image = article.urlToImage;
         let imageLarge = article.urlToImage;
         if (!image) {
@@ -46,6 +46,29 @@ export class NewsList {
         </div>
         <a href="${article.url}">
             <h2>${article.title}</h2>
+        </a>
+    </div>`;
+    }*/
+
+    topNewsTemplate(article) {
+        let image = article.thread.main_image;
+        let imageLarge = article.thread.main_image;
+        if (!image) {
+            image = "images/news-placeholder.webp"
+            imageLarge = "images/news-placeholder-large.webp"
+        }
+        return `<div class="headline">
+        <div class="image">
+            <a href="${article.thread.url}">
+                <picture>
+                    <source media="(min-width: 511px) and (max-width: 1023px)" srcset="${imageLarge}"/>
+                    <img src="${image}" width="510" height="340" alt="${article.thread.title}"/>
+                </picture>
+            </a>
+            <p class="media">${article.thread.site}, ${article.thread.published.split("T")[0]}</p>
+        </div>
+        <a href="${article.thread.url}">
+            <h2>${article.thread.title}</h2>
         </a>
     </div>`;
     }
