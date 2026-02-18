@@ -32,6 +32,10 @@ a:active {
     color: var(--tertiary-color);
 }
 
+input:focus, select:focus {
+    background-color: var(--primary-color-faded);
+}
+
 /* Start of Header styles */
 header {
     padding: 20px;
