@@ -1,3 +1,4 @@
+import { getStockData } from "./apiDataFetch.mjs";
 export class OneStock {
     constructor(element, stocklist) {
         this.stocklist = stocklist;
@@ -9,18 +10,10 @@ export class OneStock {
     };
 
     async renderStockData(stocklist) {
-        let mockStockData;
-        try {
-            const response = await fetch('data/mockStockData.json');
-            mockStockData = await response.json();
-        } catch (error) {
-            console.error('Failed to load mock stock data:', error);
-            return;
-        }
         const stocks = stocklist;
         const stockSection = this.element;
         for (const stock of stocks) {
-            const data = mockStockData[stock]; //await getStockData(stock);
+            const data = await getStockData(stock);
             const stockTemplate = this.stockTemplate(data);
             stockSection.insertAdjacentHTML('beforeend', stockTemplate);
         }

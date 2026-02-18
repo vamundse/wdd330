@@ -8,23 +8,7 @@ export class StockSearch {
     }
 
     async renderStockSearch() {
-        // Load mock stock data from shared JSON file
-        let mockStockData;
-        try {
-            const response = await fetch('data/mockStockData.json');
-            mockStockData = await response.json();
-        } catch (error) {
-            console.error('Failed to load mock stock data:', error);
-            return;
-        }
-
-        // gets the codes we want to create tickers for
-        const getTickers = Object.keys(mockStockData).filter(key =>
-            key.toLowerCase().includes(this.param.toLowerCase()) ||
-            mockStockData[key].name.toLowerCase().includes(this.param.toLowerCase())
-        );
-        // console.log("tickers:", getTickers);
-        const tickers = getTickers; //await this.getTickers();
+        const tickers = await this.getTickers();
 
         if (tickers.length > 0) {
             // gets the stockListTemplate method from the StockTickers class
@@ -40,7 +24,7 @@ export class StockSearch {
             // gets the data, adds the template and appends the tr
             // to the HTML element, which should be a table
             for (const ticker of tickers) {
-                const data = /*mockStockData[ticker]; //*/ await getStockData(ticker);
+                const data = await getStockData(ticker);
                 const tickerRow = this.stockSearchTemplate(data);
                 this.element.appendChild(tickerRow);
                 table.appendChild(tickerRow);

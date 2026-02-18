@@ -15,16 +15,6 @@ export class StockTickers {
         // gets the tickers we want to get data for
         const tickers = this.tickers;
 
-        // Load mock stock data from shared JSON file
-        let mockStockData;
-        try {
-            const response = await fetch('data/mockStockData.json');
-            mockStockData = await response.json();
-        } catch (error) {
-            console.error('Failed to load mock stock data:', error);
-            return;
-        }
-
         const div = document.createElement('div');
         div.classList.add('stocks-section');
         const header = document.createElement('div');
@@ -35,7 +25,7 @@ export class StockTickers {
         // gets the data, adds the template and appends the tr
         // to the HTML element, which should be a table
         for (const ticker of tickers) {
-            const data = mockStockData[ticker] //await getStockData(ticker);
+            const data = await getStockData(ticker);
             const tickerRow = this.stockListTemplate(data);
             div.appendChild(tickerRow);
         }

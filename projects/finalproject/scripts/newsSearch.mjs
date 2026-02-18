@@ -9,7 +9,7 @@ export class NewsSearch {
     async renderNewsSearchResults() {
         const param = this.param;
         if(param) {
-            const data = await this.getMockNewsData(param) // await getNewsData(param);
+            const data = await getNewsData(param);
             if(data && data.length > 0) {
                 let html = "";
                 const newsResults = document.createElement('div');
@@ -25,23 +25,6 @@ export class NewsSearch {
                 newsResults.insertAdjacentHTML('beforeend', html);
                 this.element.appendChild(newsResults);
             }
-        }
-    }
-
-    async getMockNewsData(param) {
-        try {
-            const response = await fetch('./data/mockNewsData.json');
-            const allNews = await response.json();
-            // Filter news by title, description, or source name
-            const filtered = allNews.filter(article =>
-                article.title.toLowerCase().includes(param.toLowerCase()) ||
-                article.description?.toLowerCase().includes(param.toLowerCase()) ||
-                article.source.name.toLowerCase().includes(param.toLowerCase())
-            );
-            return filtered;
-        } catch (error) {
-            console.error('Failed to load mock news data:', error);
-            return [];
         }
     }
 
@@ -71,7 +54,7 @@ export class NewsFavorites {
     async renderNewsSearchResults() {
         const param = this.param;
         if(param) {
-            const data = await this.getMockNewsData(param) // await getNewsData(param);
+            const data = await getNewsData(param);
             if(data && data.length > 0) {
                 let html = "";
                 const newsResults = document.createElement('div');
@@ -86,23 +69,6 @@ export class NewsFavorites {
             } else {
                 document.getElementById('news-message').innerHTML = `We didn't have any relevant ${param} articles at the time.`;
             }
-        }
-    }
-
-    async getMockNewsData(param) {
-        try {
-            const response = await fetch('./data/mockNewsData.json');
-            const allNews = await response.json();
-            // Filter news by title, description, or source name
-            const filtered = allNews.filter(article =>
-                article.title.toLowerCase().includes(param.toLowerCase()) ||
-                article.description?.toLowerCase().includes(param.toLowerCase()) ||
-                article.source.name.toLowerCase().includes(param.toLowerCase())
-            );
-            return filtered;
-        } catch (error) {
-            console.error('Failed to load mock news data:', error);
-            return [];
         }
     }
 
