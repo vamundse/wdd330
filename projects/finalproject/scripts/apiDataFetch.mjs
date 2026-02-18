@@ -37,7 +37,7 @@ export async function getCurrencyData(currencyList, baseCurrency) {
 }     
 
 export async function getNewsData(category) {
-    const apiKey = "f52b88432ac34ea7992ba153bed76bbb";
+    const apiKey = "6351960f47e44bb2872e21d0cff98c86";
     const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}&language=en`;
     try {
         const response = await fetch(apiUrl);
