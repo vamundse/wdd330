@@ -16,7 +16,7 @@ export class SearchBar {
             main.innerHTML = "";
             this.showCurrencySearch(param);
             this.showStockSearch(param);
-            this.showNewsSearch(param);
+            //this.showNewsSearch(param);
         } else {
             this.element.classList.toggle('closed');
         }

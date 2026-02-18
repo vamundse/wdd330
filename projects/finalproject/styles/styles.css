@@ -225,10 +225,16 @@ main {
 .search-article img {
     width: 100%;
 }
-.search-article .search-ticker {
-            display: flex;
-            gap: 5px;
-            margin: -2px;
+.search-article {
+    display: flex;
+    gap: 5px;
+    margin: -2px;
+}
+
+.search-ticker {
+    display: flex;
+    gap: 5px;
+    margin: -2px;
 }
 
 .search-results.closed {
