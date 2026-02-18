@@ -42,10 +42,12 @@ export class FavoriteNews {
             console.log('button pushed')
             const topicInput = document.getElementById('add-favorite-news').value;
             let favorites = JSON.parse(localStorage.getItem('news-favorites')) || [];
-            favorites.push(topicInput);
-            console.log('Added:', topicInput)
-            localStorage.setItem('news-favorites', JSON.stringify(favorites));
-            this.makeDatalist();
+            if(!favorites.includes(topicInput)) {
+                favorites.push(topicInput);
+                console.log('Added:', topicInput)
+                localStorage.setItem('news-favorites', JSON.stringify(favorites));
+                this.makeDatalist();
+            }
         });
     }
 
