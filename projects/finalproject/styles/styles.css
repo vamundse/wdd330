@@ -280,7 +280,6 @@ main {
 .news form label a:hover {
     background-color: var(--primary-color-faded);
 }
-    
 
 .news select, .general-news select {
     width: 100%;
@@ -304,6 +303,11 @@ main {
     border-bottom: 5px solid var(--secondary-color);
     animation-name: newsReel;
     animation-duration: 2s;
+    transition: border-bottom 1s;
+}
+
+#top-news img:hover, .all-news-results img:hover {
+    border-bottom: 5px solid var(--primary-color);
 }
 
 #top-news a,
@@ -314,6 +318,14 @@ main {
     color: var(--black-color);
     text-decoration: none;
     font-size: 20px;
+    transition: color 1s;
+}
+
+#top-news a:hover,
+#top-news h2:hover,
+.all-news-results a:hover,
+.all-news-results h2:hover {
+    color: var(--secondary-color);
 }
 
 #top-news .image,
@@ -458,11 +470,20 @@ main {
     border: 1px solid var(--black-color);
     animation-name: button-turn;
     animation-duration: 2s;
+    cursor: pointer;
 }
 
 @keyframes button-turn {
     from {transform: translate(0, 10px)}
     to {transform: rotate(0)}
+}
+
+.currency-convertor form button:hover {
+    background-color: var(--black-color);
+}
+
+.currency-convertor form button:active {
+    background-color: var(--secondary-color);
 }
 
 .currency-rates {
@@ -586,6 +607,10 @@ main {
     animation-duration: 2s;
 }
 
+.one-stock:hover {
+    background-color: var(--white-color);
+}
+
 @keyframes one-stock-animation {
     from {width: 90%;
     background-color: var(--white-color);}
@@ -650,6 +675,15 @@ main {
     cursor: pointer;
 }
 
+.add-stocks button:hover,
+#add-news-button:hover {
+    background-color: var(--black-color);
+}
+
+.add-stocks button:active,
+#add-news-button:active {
+    background-color: var(--secondary-color);
+}
 
 @media screen and (min-width:1024px) {
     .stocks-container {
@@ -692,6 +726,7 @@ main {
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 #news-fav-btn::after {
@@ -708,6 +743,14 @@ main {
 
 .news-favorites-list.open::before {
     content: 'Close ';
+}
+
+#news-fav-btn:hover {
+    background-color: var(--black-color);
+}
+
+#news-fav-btn:active {
+    background-color: var(--secondary-color);
 }
 
 #news-topics {
